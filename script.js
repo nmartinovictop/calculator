@@ -1,6 +1,6 @@
 
 function add(a,b) {
-    return a + b;
+    return parseInt(a) + parseInt(b);
 }
 
 function subtract(a,b) {
@@ -29,9 +29,18 @@ function operate(operator,num1,num2) {
 
 let nums = document.querySelectorAll('.numpad')
 let operators = document.querySelectorAll('.operator')
+let equal = document.querySelector('.equals')
+let display = document.querySelector('.display')
+let content = document.createElement('p');
+display.appendChild(content)
+
+
 let num1 = '';
 let num2 = '';
 let currentOp = '';
+let result = '';
+
+equal.addEventListener('click',calculate)
 
 nums.forEach( num => {
     num.addEventListener('click', numCollector)
@@ -51,6 +60,10 @@ function numCollector() {
 }
 
 function calculate() {
-   return operate(currentOp,num1,num2)
-
+   result = operate(currentOp,num1,num2);
+    num1 = result;
+    num2 = '';
+    currentOp = ''
+    content.textContent = result;
+    return result
 }
