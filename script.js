@@ -1,6 +1,6 @@
 
 function add(a,b) {
-    return parseInt(a) + parseInt(b);
+    return parseFloat(a) + parseFloat(b);
 }
 
 function subtract(a,b) {
@@ -32,6 +32,8 @@ let operators = document.querySelectorAll('.operator')
 let equal = document.querySelector('.equals')
 let display = document.querySelector('.display')
 let content = document.createElement('p');
+let decimal = document.querySelector('.decimal')
+let clear = document.querySelector('.clear')
 display.appendChild(content)
 
 
@@ -40,6 +42,20 @@ let num2 = '';
 let currentOp = '';
 let result = '';
 
+
+decimal.addEventListener('click',addDecimal)
+
+function addDecimal() {
+    if (currentOp === '') {
+        num1 += this.textContent
+    } else {
+        num2 += this.textContent
+    }
+
+    decimal.removeEventListener('click',addDecimal)
+
+}
+
 equal.addEventListener('click',calculate)
 
 nums.forEach( num => {
@@ -47,7 +63,11 @@ nums.forEach( num => {
 });
 
 operators.forEach (op => {
-    op.addEventListener('click',() => currentOp += op.textContent)
+    op.addEventListener('click',() => {
+    currentOp += op.textContent
+    decimal.addEventListener('click',addDecimal)})
+    
+
 });
 
 
@@ -57,6 +77,7 @@ function numCollector() {
     } else {
         num2 += this.textContent
     }
+
 }
 
 function calculate() {
@@ -67,3 +88,13 @@ function calculate() {
     content.textContent = result;
     return result
 }
+
+clear.addEventListener('click',function() {
+    num1 = '';
+    num2 = '';
+    currentOp = '';
+    decimal.addEventListener('click',addDecimal);
+})
+
+
+
