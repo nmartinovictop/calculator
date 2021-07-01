@@ -68,14 +68,24 @@ nums.forEach( num => {
     num.addEventListener('click', numCollector)
 });
 
+
+function dog() {
 operators.forEach (op => {
+
     op.addEventListener('click',() => {
     currentOp += op.textContent
     data.textContent += op.textContent
     decimal.addEventListener('click',addDecimal)})
-    
 
-});
+})};
+
+function test() {
+    operators.forEach (op => {
+
+        op.removeEventListener('click',() => {
+        currentOp += op.textContent
+        data.textContent += op.textContent
+})})}
 
 
 
@@ -106,6 +116,7 @@ clear.addEventListener('click',function() {
     num2 = '';
     currentOp = '';
     data.textContent = ''
+    content.textContent = ''
     decimal.addEventListener('click',addDecimal);
 })
 

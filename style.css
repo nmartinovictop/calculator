@@ -8,17 +8,25 @@
     width: 800px;
     justify-content: center;
     flex-wrap: wrap;
+    background: goldenrod
 }
 
-.display {
+.display-container {
+    display: flex;
+    flex-direction: column;
     height: 20%;
     width: 90%;
 }
 
+.display {
+    height: 50%;
+    background: gray
+}
+
 .entries {
-    height: 4%;
-    width: 90%;
-    margin: 0;
+    /* height: 4%; */
+    height: 50%;
+    background: lightblue
 }
 
 .keypad-row {
