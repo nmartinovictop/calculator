@@ -36,6 +36,7 @@ let decimal = document.querySelector('.decimal')
 let clear = document.querySelector('.clear')
 let entries = document.querySelector('.entries')
 let data = document.createElement('p')
+let negator = document.querySelector('.negator')
 display.appendChild(content)
 entries.appendChild(data)
 
@@ -62,31 +63,34 @@ function addDecimal() {
 
 }
 
-equal.addEventListener('click',calculate)
+equal.addEventListener('click', () => {
+    if (num1 !== '' && num2 !== '' && currentOp !== '') {
+        calculate()
+    }
+})
 
 nums.forEach( num => {
     num.addEventListener('click', numCollector)
 });
 
 
-function dog() {
-operators.forEach (op => {
+function opClick(e) {
+    currentOp += this.textContent
+    data.textContent += this.textContent
+    decimal.addEventListener('click',addDecimal)
+    removeOp()}
 
-    op.addEventListener('click',() => {
-    currentOp += op.textContent
-    data.textContent += op.textContent
-    decimal.addEventListener('click',addDecimal)})
 
+function addOp() {
+    operators.forEach (op => {
+        op.addEventListener('click',opClick)
 })};
 
-function test() {
+function removeOp() {
     operators.forEach (op => {
-
-        op.removeEventListener('click',() => {
-        currentOp += op.textContent
-        data.textContent += op.textContent
-})})}
-
+        op.removeEventListener('click',opClick)
+    })
+}
 
 
 function numCollector() {
@@ -108,6 +112,7 @@ function calculate() {
     currentOp = ''
     content.textContent = result;
     data.textContent += `= ${result}`
+    addOp()
     return result
 }
 
@@ -118,7 +123,8 @@ clear.addEventListener('click',function() {
     data.textContent = ''
     content.textContent = ''
     decimal.addEventListener('click',addDecimal);
+    addOp()
 })
 
-
+addOp()
 
