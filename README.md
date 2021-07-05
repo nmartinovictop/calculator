@@ -3,6 +3,7 @@ https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/cal
 
 **Next Action: Try to add JS**
 
+- 2021-07-05: taking break on negator to work on display
 - 2021-07-04: struggling with the negator.  I need to rewrite the display
 - 2021-07-03: Working on calculator.  Need to figure out how to do negator.
 - 2021-07-01: Working on calculator.  Want to remove the event listener from the op to prevent double ++ but trying to figure this out.

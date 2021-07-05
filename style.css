@@ -8,7 +8,17 @@
     width: 800px;
     justify-content: center;
     flex-wrap: wrap;
-    background: goldenrod
+    background: lightgrey
+}
+
+
+.keypad {
+    background-color: white
+}
+
+.display p {
+    font-size: 44px;
+    height: 48px
 }
 
 .display-container {
@@ -20,7 +30,11 @@
 
 .display {
     height: 50%;
-    background: gray
+    background: gray;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
 }
 
 .entries {
@@ -49,7 +63,9 @@
 
 .keypad {
     height: 24%;
-    width: 24%
+    width: 24%;
+    font-size: 30px;
+    
 }
 
 
