@@ -35,11 +35,16 @@ let content = document.createElement('p');
 let decimal = document.querySelector('.decimal')
 let clear = document.querySelector('.clear')
 let entries = document.querySelector('.entries')
-let data = document.createElement('p')
+// let data = document.createElement('p')
 let negator = document.querySelector('.negator')
-display.appendChild(content)
-entries.appendChild(data)
+// display.appendChild(content)
+// entries.appendChild(data)
 
+function entriesSlicer() {
+    if (entries.textContent.length > 50) {
+        entries.textContent = entries.textContent.slice(entries.textContent.length - 50)
+    }
+}
 
 let num1 = '';
 let num2 = '';
@@ -48,15 +53,46 @@ let result = '';
 // let data = ''
 
 
+
+function negatorClick() {
+    if (num2 !== '') {
+        
+
+        entries.textContent = entries.textContent.slice(0,(entries.textContent.length - `${num2}`.length))
+        num2 *= -1;
+        entries.textContent += num2
+    } else {
+        // entries.textContent = entries.textContent.slice(0,(entries.textContent.length - `${num1}`.length))
+        // num1 *= -1
+        // display.textContent = num1
+        // entries.textContent += num1
+
+        currentOp = '*'
+        num2 = -1
+        entriesSlicer()
+
+        entries.textContent += ` * ${num2}`
+        
+        calculate()
+        
+    }
+}
+
+negator.addEventListener('click',negatorClick)
+
 decimal.addEventListener('click',addDecimal)
 
 function addDecimal() {
     if (currentOp === '') {
         num1 += this.textContent
-        data.textContent += this.textContent
+        // data.textContent += this.textContent
+        entries.textContent += this.textContent
+        entriesSlicer()
     } else {
         num2 += this.textContent
-        data.textContent += this.textContent
+        // data.textContent += this.textContent
+        entries.textContent += this.textContent
+        entriesSlicer()
     }
 
     decimal.removeEventListener('click',addDecimal)
@@ -75,10 +111,13 @@ nums.forEach( num => {
 
 
 function opClick(e) {
+    if (num1 !== '') {
     currentOp += this.textContent
-    data.textContent += this.textContent
+    // data.textContent += this.textContent
+    entries.textContent += this.textContent
+    entriesSlicer()
     decimal.addEventListener('click',addDecimal)
-    removeOp()}
+    removeOp()}}
 
 
 function addOp() {
@@ -96,11 +135,17 @@ function removeOp() {
 function numCollector() {
     if (currentOp === '') { 
         num1 += this.textContent
-        data.textContent += this.textContent
+        // data.textContent += this.textContent
+        entries.textContent += this.textContent
+        entriesSlicer()
+
         
     } else {
         num2 += this.textContent
-        data.textContent += this.textContent
+        // data.textContent += this.textContent
+        entries.textContent += this.textContent
+        entriesSlicer()
+
     }
 
 }
@@ -110,8 +155,12 @@ function calculate() {
     num1 = result;
     num2 = '';
     currentOp = ''
-    content.textContent = result;
-    data.textContent += `= ${result}`
+    // content.textContent = result;
+    display.textContent = result;
+    // data.textContent += `= ${result}`
+    entries.textContent += `= ${result}`
+    entriesSlicer()
+
     addOp()
     return result
 }
@@ -120,8 +169,11 @@ clear.addEventListener('click',function() {
     num1 = '';
     num2 = '';
     currentOp = '';
-    data.textContent = ''
-    content.textContent = ''
+    // data.textContent = ''
+    entries.textContent = ''
+    entriesSlicer()
+    // content.textContent = ''
+    display.textContent = ''
     decimal.addEventListener('click',addDecimal);
     addOp()
 })
