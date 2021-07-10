@@ -117,11 +117,14 @@ function opClick(e) {
     entries.textContent += this.textContent
     entriesSlicer()
     decimal.addEventListener('click',addDecimal)
+    this.classList.add('selected')
     removeOp()}}
+    
 
 
 function addOp() {
     operators.forEach (op => {
+        op.classList.remove('selected')
         op.addEventListener('click',opClick)
 })};
 
@@ -134,9 +137,17 @@ function removeOp() {
 
 function numCollector() {
     if (currentOp === '') { 
+        if (result === '') {
         num1 += this.textContent
         // data.textContent += this.textContent
-        entries.textContent += this.textContent
+        entries.textContent += this.textContent } else {
+            result = ''
+            let placeholder = this.textContent
+            console.log(placeholder)
+            clearFunction()
+            num1 += placeholder
+            entries.textContent += num1
+        }
         entriesSlicer()
 
         
@@ -152,6 +163,11 @@ function numCollector() {
 
 function calculate() {
    result = operate(currentOp,num1,num2);
+   if (result > Number.MAX_SAFE_INTEGER) {
+       num1 = '';
+       num2 = ''
+       display.textContent = 'NUMBER TOO BIG'
+   } else {
     num1 = result;
     num2 = '';
     currentOp = ''
@@ -162,10 +178,12 @@ function calculate() {
     entriesSlicer()
 
     addOp()
-    return result
+    return result }
 }
 
-clear.addEventListener('click',function() {
+clear.addEventListener('click',clearFunction)
+
+function clearFunction() {
     num1 = '';
     num2 = '';
     currentOp = '';
@@ -176,7 +194,7 @@ clear.addEventListener('click',function() {
     display.textContent = ''
     decimal.addEventListener('click',addDecimal);
     addOp()
-})
+}
 
 addOp()
 
